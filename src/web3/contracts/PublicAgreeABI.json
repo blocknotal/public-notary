@@ -1,0 +1,612 @@
+[
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_userAddress",
+				"type": "address"
+			}
+		],
+		"name": "getUserContracts",
+		"outputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "",
+				"type": "uint256[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_userAddress",
+				"type": "address"
+			}
+		],
+		"name": "getUserAgreeFullData",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "enum BlockNotalPublicAgree.STATE_SIGN[]",
+						"name": "status",
+						"type": "uint8[]"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint8",
+								"name": "V",
+								"type": "uint8"
+							},
+							{
+								"internalType": "bytes32",
+								"name": "R",
+								"type": "bytes32"
+							},
+							{
+								"internalType": "bytes32",
+								"name": "S",
+								"type": "bytes32"
+							}
+						],
+						"internalType": "struct BlockNotalPublicAgree.SignModel[]",
+						"name": "signatures",
+						"type": "tuple[]"
+					},
+					{
+						"internalType": "address[]",
+						"name": "signers",
+						"type": "address[]"
+					},
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "arDataUrl",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "dataSha256",
+								"type": "string"
+							}
+						],
+						"internalType": "struct BlockNotalPublicAgree.AgreeDataModel",
+						"name": "data",
+						"type": "tuple"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"internalType": "struct BlockNotalPublicAgree.ResultModel[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "AGREE_TYPEHASH",
+		"outputs": [
+			{
+				"internalType": "bytes32",
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_agreeId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint8",
+				"name": "_sigV",
+				"type": "uint8"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "_sigR",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "_sigS",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "address",
+				"name": "_signer",
+				"type": "address"
+			}
+		],
+		"name": "signAgree",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_agreeId",
+				"type": "uint256"
+			}
+		],
+		"name": "getAgreeFullData",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "enum BlockNotalPublicAgree.STATE_SIGN[]",
+						"name": "status",
+						"type": "uint8[]"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint8",
+								"name": "V",
+								"type": "uint8"
+							},
+							{
+								"internalType": "bytes32",
+								"name": "R",
+								"type": "bytes32"
+							},
+							{
+								"internalType": "bytes32",
+								"name": "S",
+								"type": "bytes32"
+							}
+						],
+						"internalType": "struct BlockNotalPublicAgree.SignModel[]",
+						"name": "signatures",
+						"type": "tuple[]"
+					},
+					{
+						"internalType": "address[]",
+						"name": "signers",
+						"type": "address[]"
+					},
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "arDataUrl",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "dataSha256",
+								"type": "string"
+							}
+						],
+						"internalType": "struct BlockNotalPublicAgree.AgreeDataModel",
+						"name": "data",
+						"type": "tuple"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"internalType": "struct BlockNotalPublicAgree.ResultModel",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "address[]",
+				"name": "_signers",
+				"type": "address[]"
+			},
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "arDataUrl",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "dataSha256",
+						"type": "string"
+					}
+				],
+				"internalType": "struct BlockNotalPublicAgree.AgreeDataModel",
+				"name": "_agreeData",
+				"type": "tuple"
+			}
+		],
+		"name": "newPublicAgree",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_userAddress",
+				"type": "address"
+			}
+		],
+		"name": "getUserPendingAgreeFullData",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "enum BlockNotalPublicAgree.STATE_SIGN[]",
+						"name": "status",
+						"type": "uint8[]"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint8",
+								"name": "V",
+								"type": "uint8"
+							},
+							{
+								"internalType": "bytes32",
+								"name": "R",
+								"type": "bytes32"
+							},
+							{
+								"internalType": "bytes32",
+								"name": "S",
+								"type": "bytes32"
+							}
+						],
+						"internalType": "struct BlockNotalPublicAgree.SignModel[]",
+						"name": "signatures",
+						"type": "tuple[]"
+					},
+					{
+						"internalType": "address[]",
+						"name": "signers",
+						"type": "address[]"
+					},
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "arDataUrl",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "dataSha256",
+								"type": "string"
+							}
+						],
+						"internalType": "struct BlockNotalPublicAgree.AgreeDataModel",
+						"name": "data",
+						"type": "tuple"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"internalType": "struct BlockNotalPublicAgree.ResultModel[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "verifyingContract",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_userAddress",
+				"type": "address"
+			}
+		],
+		"name": "getDeployAgrees",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "enum BlockNotalPublicAgree.STATE_SIGN[]",
+						"name": "status",
+						"type": "uint8[]"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint8",
+								"name": "V",
+								"type": "uint8"
+							},
+							{
+								"internalType": "bytes32",
+								"name": "R",
+								"type": "bytes32"
+							},
+							{
+								"internalType": "bytes32",
+								"name": "S",
+								"type": "bytes32"
+							}
+						],
+						"internalType": "struct BlockNotalPublicAgree.SignModel[]",
+						"name": "signatures",
+						"type": "tuple[]"
+					},
+					{
+						"internalType": "address[]",
+						"name": "signers",
+						"type": "address[]"
+					},
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "arDataUrl",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "dataSha256",
+								"type": "string"
+							}
+						],
+						"internalType": "struct BlockNotalPublicAgree.AgreeDataModel",
+						"name": "data",
+						"type": "tuple"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"internalType": "struct BlockNotalPublicAgree.ResultModel[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "EIP712_DOMAIN_TYPEHASH",
+		"outputs": [
+			{
+				"internalType": "bytes32",
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_docHash",
+				"type": "string"
+			}
+		],
+		"name": "getAgreeByHash",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "enum BlockNotalPublicAgree.STATE_SIGN[]",
+						"name": "status",
+						"type": "uint8[]"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint8",
+								"name": "V",
+								"type": "uint8"
+							},
+							{
+								"internalType": "bytes32",
+								"name": "R",
+								"type": "bytes32"
+							},
+							{
+								"internalType": "bytes32",
+								"name": "S",
+								"type": "bytes32"
+							}
+						],
+						"internalType": "struct BlockNotalPublicAgree.SignModel[]",
+						"name": "signatures",
+						"type": "tuple[]"
+					},
+					{
+						"internalType": "address[]",
+						"name": "signers",
+						"type": "address[]"
+					},
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "arDataUrl",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "dataSha256",
+								"type": "string"
+							}
+						],
+						"internalType": "struct BlockNotalPublicAgree.AgreeDataModel",
+						"name": "data",
+						"type": "tuple"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"internalType": "struct BlockNotalPublicAgree.ResultModel",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "arDataUrl",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "dataSha256",
+						"type": "string"
+					}
+				],
+				"internalType": "struct BlockNotalPublicAgree.AgreeDataModel",
+				"name": "_data",
+				"type": "tuple"
+			},
+			{
+				"internalType": "uint8",
+				"name": "sigV",
+				"type": "uint8"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "sigR",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "sigS",
+				"type": "bytes32"
+			}
+		],
+		"name": "recoverAddressSign",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "_agreeId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "_signer",
+				"type": "address"
+			}
+		],
+		"name": "newSign",
+		"type": "event"
+	}
+]
