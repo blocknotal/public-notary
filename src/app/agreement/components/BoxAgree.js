@@ -1,9 +1,10 @@
 import React from 'react'
 import { Grid, Typography, Button, Paper, Avatar, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails  } from '@material-ui/core'
 import makeBlockie from 'ethereum-blockies-base64'
+import downloadFile from '../../../utils/downloadDocument'
 
 const BoxAgree = props => {
-    const { contract, userAddress, signDoc, viewDoc, hiddeOwner } = props 
+    const { contract, userAddress, signDoc, hiddeOwner, viewDoc } = props 
     console.log(contract)
     return(
         <Grid container direction="column" alignItems="center" alignContent="center" style={{ marginTop: 5, marginBottom: 5 }}>

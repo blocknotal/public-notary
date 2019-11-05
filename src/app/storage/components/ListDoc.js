@@ -11,7 +11,8 @@ const ListDoc = props => {
         )
     }
     return(
-        <Grid container direction="column">
+        <Grid container style={{padding:10}} alignContent="center" justify="center" alignsItems="center" direction="column">
+            <div style={{ maxWidth: 750 }}>
             <Table>
             {files.map(file => (
                 <TableRow>
@@ -22,6 +23,7 @@ const ListDoc = props => {
                 </TableRow>
             ))}
             </Table>
+            </div>
         </Grid>
     )
 }

@@ -2,10 +2,10 @@ import React from 'react'
 import { Grid, Typography, Button, TextField, Dialog } from '@material-ui/core'
 import getBlockNotalContract from '../../web3/utils/getBlockNotalContract'
 import BoxAgree from './components/BoxAgree'
-import ViewDoc from '../storage/components/ViewDoc'
 import LoadingModal from '../../utils/LoadingModal'
 import getDocByUrl from '../../web3/utils/getDocByUrl'
 import { getPdfFileData } from '../../utils/readDataUtils'
+import downloadFile from '../../utils/downloadDocument'
 
 class SearchAgree extends React.Component{
     state = {
@@ -79,7 +79,7 @@ class SearchAgree extends React.Component{
         try{
             this.setState({ loadingModal: true })
             const docData = await getDocByUrl(dataUrl)
-            this.setState({ docViewData: docData, viewDocModal: true, loadingModal: false  })
+            downloadFile(docData)
         }catch(err){
             console.log(err)
             this.setState({ loadingModal: false })
@@ -116,7 +116,6 @@ class SearchAgree extends React.Component{
                     </Grid>
                     }
                 </div>
-                <ViewDoc open={viewDocModal} docFile={docViewData} closeViewDoc={this.closeViewDoc} />
                 <LoadingModal open={loadingModal} />
             </Grid>
         )

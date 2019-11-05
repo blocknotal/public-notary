@@ -7,7 +7,8 @@ import generateUploadDocTx from '../../web3/generateUploadDocTx';
 import ConfirmTransactionModal from './components/ConfirmTransactionModal';
 import { arweave } from '../../web3';
 import ListDoc from './components/ListDoc';
-import ViewDoc from './components/ViewDoc';
+import downloadFile from '../../utils/downloadDocument';
+import { Redirect } from 'react-router-dom'
 
 
 class StorageIndex extends React.Component{
@@ -18,6 +19,7 @@ class StorageIndex extends React.Component{
         docHash: false,
         loadingModal: false,
         viewDocModal: false,
+        deployFile: false
 
     }
 
@@ -52,16 +54,19 @@ class StorageIndex extends React.Component{
             var transaction = uploadDocTransaction
             await arweave.transactions.sign(transaction, account)
             const response = await arweave.transactions.post(transaction)
+            console.log(transaction)
             this.clearState()
-            alert('Transaction Deploy, wait the confirmation for view your file')
-        }catch(err){
+            this.setState({ deployFile: transaction.id })
+        }catch(e){
             alert('Transaction Failed')
             this.setState({ loadingModal: false })
-            console.log(err)
+            console.log(e)
         }
     }
 
-    openDoc = (docFileUrl) => this.setState({ viewDocFile: docFileUrl , viewDocModal: true })
+    openDoc = (docFileUrl) => {
+        downloadFile(docFileUrl)
+    }
 
     clearState = () => this.setState({ uploadDocTransaction: false, uploadDocFee: false, docName: false, loadingModal: false })
 
@@ -69,7 +74,16 @@ class StorageIndex extends React.Component{
 
     render(){
         const { arUserData, arStorageList } = this.props
-        const { uploadDocFee, docName, loadingModal, viewDocFile, viewDocModal, docHash } = this.state
+        const { uploadDocFee, docName, loadingModal, docHash, deployFile } = this.state
+        if(deployFile){
+            return(
+                <Redirect to={{
+                    pathname: '/home/confirmfiledeploy',
+                    state: { txHashDeploy: deployFile }
+                }}
+        />
+            )
+        }
             return(
                 <Grid container alignContent="center" alignItems="center" justify="center" direction="column">
                     <Typography variant="h6" align="center">Storage Index</Typography>
@@ -80,7 +94,6 @@ class StorageIndex extends React.Component{
                     <Button onClick={() => this.refs.docInput.click()}>Upload Document</Button>
                     <input ref="docInput" type="file" accept="application/pdf" onChange={ event => this.uploadDoc(event)} style={{ display: 'none' }} />
                     <ListDoc files={arStorageList.fileList} openDoc={this.openDoc} />
-                    <ViewDoc open={viewDocModal} docFile={viewDocFile} closeViewDoc={this.closeViewDoc} />
                     </Grid>
                     :
                     <UploadArweaveAccount loadArAccount={this.loadArAccount} />

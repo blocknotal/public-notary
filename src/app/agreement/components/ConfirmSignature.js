@@ -11,8 +11,9 @@ const ConfirmSignature = props => {
     const { signature, agreeId, txHashDeploy } = props.location.state.signDeployData
     return(
         <Grid container direction="column" justify="center" alignItems="center" alignContent="center">
+            <div style={{maxWidth: 700}}>
             <Typography>Signature Deploy! wait mining for confirmation</Typography>
-            <Typography style={{margin: 10}}>Agreement #{agreeId}</Typography>
+            <Typography variant="h6" style={{margin: 10}}>Agreement #{agreeId}</Typography>
             <Typography>Signature:</Typography>
             <Typography style={{ wordBreak: 'break-all' }}>{signature}</Typography>
             <Typography style={{marginTop: 10}}>
@@ -26,6 +27,7 @@ const ConfirmSignature = props => {
                             View on EtherScan
                         </Typography>
                     </a>
+            </div>
         </Grid>
     )
 }

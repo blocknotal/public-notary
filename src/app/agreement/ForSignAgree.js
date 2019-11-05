@@ -5,9 +5,9 @@ import BoxAgree from './components/BoxAgree';
 import getTypedDataSign from '../../web3/utils/getTypedDataSign';
 import signTypedData from '../../web3/utils/signTypedData';
 import getDocByUrl from '../../web3/utils/getDocByUrl';
-import ViewDoc from '../storage/components/ViewDoc';
 import LoadingModal from '../../utils/LoadingModal';
 import { Redirect } from 'react-router-dom'
+import downloadFile from '../../utils/downloadDocument';
 
 class ForSignAgree extends React.Component{
     state = {
@@ -63,7 +63,8 @@ class ForSignAgree extends React.Component{
         try{
             this.setState({ loadingFileView: true })
             const docData = await getDocByUrl(dataUrl)
-            this.setState({ docViewData: docData, viewDocModal: true, loadingFileView: false  })
+            this.setState({ loadingFileView: false  })
+            downloadFile(docData)
         }catch(e){
             console.log(e)
             this.setState({ loadingFileView: false })
@@ -107,7 +108,6 @@ class ForSignAgree extends React.Component{
         return(
             <Grid container justify="center" direction="row" alignContent="center" alignItems="center">
                 {contractsForSign.map((contract, index) => <BoxAgree contract={contract} signDoc={this.signDoc} viewDoc={this.viewDoc} userAddress={walletAddress}/>)}
-                <ViewDoc open={viewDocModal} docFile={docViewData} closeViewDoc={this.closeViewDoc} />
                 <LoadingModal open={loadingFileView} />
             </Grid>
         )

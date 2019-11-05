@@ -10,37 +10,23 @@ import {
   DialogContent,
   CircularProgress
 } from '@material-ui/core'
-import { Link } from 'react-router-dom'
-//Convert image to Data URI for upload on arweave
+import { Redirect } from 'react-router-dom'
 import blocknotalLogo from '../../img/notal-logo-white.png'
 import styles from './styles'
 
 class Login extends Component {
   state = {
     notAuthorize: false,
-    noWeb3: false,
-    waitingAuth: false,
-    userNotRegistered: false,
-    loading: false,
-    ethereumAddress: '',
+    noWeb3: false
   }
 
-  async componentDidMount() {
-    if (window.ethereum) {
-      window.ethereum.on('accountsChanged', (accounts) => {
-        if (accounts) {
-          if (this.state.ethereumAddress !== accounts[0]) { this.setState({ ethereumAddress: accounts[0] }) }
-        }
-      })
-    }
-  }
 
 
   loginEthereum = async () => {
     const { fetchUserData } = this.props
+    this.setState({ noWeb3: false, notAuthorize: false })
     let accounts
     if (!window.ethereum && !window.web3) {
-      console.log('not exits')
       return this.setState({ noWeb3: true })
     } if (window.ethereum) {
       const web3 = new Web3(window.ethereum)
@@ -50,29 +36,27 @@ class Login extends Component {
         accounts = await web3.eth.getAccounts()
         return fetchUserData(accounts[0])
       } catch (err) {
-        console.log('not autorize 1')
-        return this.setState({ notAuthorize: true, waitingAuth: false })
+        return this.setState({ notAuthorize: true })
       }
     } else if (window.web3) {
-      this.setState({ waitingAuth: true })
       const web3 = new Web3(window.web3.currentProvider)
       accounts = await web3.eth.getAccounts()
       return fetchUserData(accounts[0])
     } else {
-      console.log('not autorize 2')
-      return this.setState({ notAuthorize: true, waitingAuth: false })
+      return this.setState({ notAuthorize: true })
     }
-  }
-
-  change = e => {
-    this.setState({ [e.target.name]: e.target.value })
   }
 
   render() {
     const {
       notAuthorize, noWeb3
     } = this.state
-    const { classes } = this.props
+    const { classes, userData } = this.props
+    if(userData.walletAddress){
+      return(
+          <Redirect to="/home" />
+      )
+  }
     return (
       <Grid container className={classes.mainDiv}>
         <Grid
@@ -97,7 +81,7 @@ class Login extends Component {
           {notAuthorize && (
             <Grid container justify="center" alignContent="center" alignItems="center" style={{ padding: 10 }}>
               <Grid item className={classes.boxError}>
-                <Typography align="center" style={{ fontSize: 12, color: '#b22f2f' }}>You not authorize Agryo to connect with your Ethereum account.<span onClick={this.loadWallet} style={{ color: 'blue' }}>Try Again</span></Typography>
+                <Typography align="center" style={{ fontSize: 12, color: '#b22f2f' }}>You not authorize Agryo to connect with your Ethereum account.<span onClick={this.loginEthereum} style={{ color: 'blue' }}>Try Again</span></Typography>
               </Grid>
             </Grid>
           )}
@@ -106,7 +90,7 @@ class Login extends Component {
           <Grid style={{ padding: 10, margin: 10 }} item>
             <Grid container justify="center" alignContent="center">
             <Button
-                onClick={() => this.loginEthereum()}
+                onClick={this.loginEthereum}
                 className={classes.buttonConfirm}
                 align="center"
                 variant="contained"

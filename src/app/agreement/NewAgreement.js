@@ -3,9 +3,9 @@ import { Grid, Typography, Button, TextField, Dialog } from '@material-ui/core'
 import Web3 from 'web3'
 import ListSigners from './components/ListSigners';
 import SelectDocument from './components/SelectDocument';
-import ViewDoc from '../storage/components/ViewDoc';
 import getBlockNotalContract from '../../web3/utils/getBlockNotalContract';
 import { Redirect } from 'react-router-dom'
+import downloadFile from '../../utils/downloadDocument';
 
 class NewAgreement extends React.Component {
     state = {
@@ -77,11 +77,16 @@ class NewAgreement extends React.Component {
 
     closeSelectDocModal = () => this.setState({ openSelect: false })
     
-    selectDoc = (documentData) => this.setState({ documentData, openSelect: false })
+    selectDoc = (documentData) => {
+        console.log(documentData)
+        this.setState({ documentData, openSelect: false })
+    }
 
     closeViewDoc = () => this.setState({ viewDocModal: false, tempViewData: false })
 
-    openDoc = (docFileUrl) => this.setState({ tempViewData: docFileUrl , viewDocModal: true })
+    openDoc = (docFileUrl) => {
+        downloadFile(docFileUrl)
+    }
 
 
     render(){
@@ -122,7 +127,7 @@ class NewAgreement extends React.Component {
                 {documentData ?
                 <Grid>
                     <Typography align="center">{documentData.docName}</Typography>
-                    <Button style={{margin: 7 }} variant="contained" color="primary" onClick={() => this.setState({ viewDocModal: true })}>
+                    <Button style={{margin: 7 }} variant="contained" color="primary" onClick={() => this.openDoc(documentData.docFile)}>
                         View Doc </Button>
                     <Button style={{margin: 7 }} variant="contained" color="secondary" onClick={() => this.setState({ documentData: false })}>
                         Clear</Button>
@@ -147,8 +152,6 @@ class NewAgreement extends React.Component {
                         openDoc={this.openDoc}
                     />
                 </Dialog>
-                <ViewDoc open={viewDocModal} docFile={documentData.docFile || tempViewData} closeViewDoc={this.closeViewDoc} />
-
             </Grid>
         )
     }

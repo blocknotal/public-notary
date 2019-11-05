@@ -5,9 +5,9 @@ import BoxAgree from './components/BoxAgree';
 import getTypedDataSign from '../../web3/utils/getTypedDataSign';
 import signTypedData from '../../web3/utils/signTypedData';
 import getDocByUrl from '../../web3/utils/getDocByUrl';
-import ViewDoc from '../storage/components/ViewDoc';
 import LoadingModal from '../../utils/LoadingModal';
 import { Redirect } from 'react-router-dom'
+import downloadFile from '../../utils/downloadDocument';
 
 class DeployAgree extends React.Component{
     state = {
@@ -65,7 +65,8 @@ class DeployAgree extends React.Component{
         try{
             this.setState({ loadingFileView: true })
             const docData = await getDocByUrl(dataUrl)
-            this.setState({ docViewData: docData, viewDocModal: true, loadingFileView: false  })
+            this.setState({ loadingFileView: false  })
+            downloadFile(docData)
         }catch(err){
             console.log(err)
             this.setState({ loadingFileView: false })
@@ -109,7 +110,6 @@ class DeployAgree extends React.Component{
         return(
             <Grid container justify="center" direction="row" alignContent="center" alignItems="center">
                 {contractsDeploy.map((contract, index) => <BoxAgree contract={contract} hiddeOwner={true} signDoc={this.signDoc} viewDoc={this.viewDoc} userAddress={walletAddress}/>)}
-                <ViewDoc open={viewDocModal} docFile={docViewData} closeViewDoc={this.closeViewDoc} />
                 <LoadingModal open={loadingFileView} />
             </Grid>
         )

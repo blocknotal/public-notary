@@ -21,6 +21,9 @@ For deploy new agreements you will need first a Arweave Wallet File( You can get
 `2 - Go to "Home" section and click on "New Agreement" button, you will be able to select a document ( that you already upload on "Storage" section ), after select the document you can put the Ethereum Address of the signataries `
 
 
+`@@ You cannot repeat a document in the agreements, the deploy of contract will fail @@`
+
+
 ##### Sign Agreements:
 For sign agreements you will need only a Ethereum Wallet with ether.
 
