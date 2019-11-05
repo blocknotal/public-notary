@@ -5,7 +5,7 @@ import ListSigners from './components/ListSigners';
 import SelectDocument from './components/SelectDocument';
 import ViewDoc from '../storage/components/ViewDoc';
 import getBlockNotalContract from '../../web3/utils/getBlockNotalContract';
-import { Link } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 class NewAgreement extends React.Component {
     state = {
@@ -87,6 +87,13 @@ class NewAgreement extends React.Component {
     render(){
         const { textAddressTemp, listSigners, openSelect, documentData, viewDocModal, deployContract, txHashDeploy, tempViewData } = this.state
         const { arUserData, arStorageList } = this.props
+        const { walletAddress } = this.props.userData
+
+        if(!walletAddress){
+            return(
+                <Redirect to="/" />
+            )
+        }
 
         if(deployContract){
             return(

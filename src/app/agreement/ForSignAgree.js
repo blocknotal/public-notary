@@ -75,6 +75,11 @@ class ForSignAgree extends React.Component{
     render(){
         const { loading, error, contractsForSign, loadingFileView, viewDocModal, docViewData, signDeployData } = this.state
         const { walletAddress } = this.props.userData
+        if(!walletAddress){
+            return(
+                <Redirect to="/" />
+            )
+        }
         if(loading){
             return(
                 <p align="center" style={{ margin: 20 }}>Loading...</p>

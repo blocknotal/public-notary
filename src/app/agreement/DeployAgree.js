@@ -23,7 +23,8 @@ class DeployAgree extends React.Component{
         const { walletAddress } = this.props.userData
         try{
             const blockNotalContract = await getBlockNotalContract()
-            const contractsDeployList = await blockNotalContract.methods.getUserPendingAgreeFullData(walletAddress).call()
+            const contractsDeployList = await blockNotalContract.methods.getDeployAgrees(walletAddress).call()
+            console.log(contractsDeployList)
             const contractsDeploy = await contractsDeployList.filter(e =>  e[1].length !== 0)
             this.setState({ contractsDeploy , loading: false })
         }catch(e){
@@ -76,6 +77,11 @@ class DeployAgree extends React.Component{
     render(){
         const { loading, error, contractsDeploy, loadingFileView, viewDocModal, docViewData, signDeployData } = this.state
         const { walletAddress } = this.props.userData
+        if(!walletAddress){
+            return(
+                <Redirect to="/" />
+            )
+        }
         if(loading){
             return(
                 <p align="center" style={{ margin: 20 }}>Loading...</p>

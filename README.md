@@ -24,7 +24,7 @@ For deploy new agreements you will need first a Arweave Wallet File( You can get
 ##### Sign Agreements:
 For sign agreements you will need only a Ethereum Wallet with ether.
 
-`1 - On "Home" section you will be able to view all requests to your address, you can view the document and all the signataries`
+`1 - On "Agreements for Sign" section you will be able to view all requests to your address, you can view the document and all the signataries`
 `2 - For confirm you signatature you will click on "Sign Request", the Ethereum Wallet will request you to sign like a "Json" data with the Url of the Document on Arweave and the hash(SHA-256) of the file, after you sign Metamask will ask you to confirm the transaction. `
 
 
